@@ -1,4 +1,4 @@
-# vagrant_main cookbook
-# This cookbook includes and sets up a server with apache
+# wordpress_demo cookbook
+# This cookbook includes and sets up a server with wordpress
 #
 require_recipe "wordpress"

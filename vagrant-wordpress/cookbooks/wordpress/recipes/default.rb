@@ -23,7 +23,12 @@ if node.has_key?("ec2")
   server_fqdn = node.ec2.public_hostname
 else
   server_fqdn = node.fqdn
-end
+end 
+server_port = ""
+if node.has_key?("wordpress_hostname")
+  server_fqdn = node.wordpress_hostname 
+  server_port = ":#{node[:vagrant][:config][:vm][:forwarded_ports][:web][:hostport]}"
+end  
 
 remote_file "#{Chef::Config[:file_cache_path]}/wordpress-#{node[:wordpress][:version]}.tar.gz" do
   checksum node[:wordpress][:checksum]
@@ -84,7 +89,7 @@ end
 #  action :create
 #end
 
-log "Navigate to 'http://#{server_fqdn}/wp-admin/install.php' to complete wordpress installation" do
+log "Navigate to 'http://#{server_fqdn}#{server_port}/wp-admin/install.php' to complete wordpress installation" do
   action :nothing
 end
 
@@ -102,7 +107,7 @@ template "#{node[:wordpress][:dir]}/wp-config.php" do
     :logged_in_key   => node[:wordpress][:keys][:logged_in],
     :nonce_key       => node[:wordpress][:keys][:nonce]
   )
-  notifies :write, resources(:log => "Navigate to 'http://#{server_fqdn}/wp-admin/install.php' to complete wordpress installation")
+  notifies :write, resources(:log => "Navigate to 'http://#{server_fqdn}#{server_port}/wp-admin/install.php' to complete wordpress installation")
 end
 
 include_recipe %w{php::php5 php::module_mysql}

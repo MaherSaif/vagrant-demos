@@ -22,7 +22,8 @@ Vagrant::Config.run do |config|
         :server_debian_password => "secure_password",
         :server_root_password => "secure_password",
         :server_repl_password => "secure_password"
-      }
+      },
+      :wordpress_hostname => "wordpress.42foo.com" 
     })
   
   # we use chef-solo to provision stuff
