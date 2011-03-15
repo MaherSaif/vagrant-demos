@@ -23,7 +23,11 @@ Vagrant::Config.run do |config|
         :server_root_password => "secure_password",
         :server_repl_password => "secure_password"
       },
-      :wordpress_hostname => "wordpress.42foo.com" 
+      :wordpress_hostname => "wordpress.42foo.com",
+      :wordpress => {
+        :version => "3.1",
+        :checksum => "297dbd014f3688b6d57329eb2988cb906fbdb1fadea33768d4584f9cbf090794"
+      } 
     })
   
   # we use chef-solo to provision stuff

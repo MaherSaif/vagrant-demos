@@ -117,4 +117,81 @@ web_app "wordpress" do
   docroot "#{node[:wordpress][:dir]}"
   server_name server_fqdn
   server_aliases node.fqdn
+end 
+
+cookbook_file File.join(node[:wordpress][:dir],".htaccess") do
+  source "dot.htaccess" 
+  mode "0644"
+end  
+
+remote_file "#{Chef::Config[:file_cache_path]}/json-api.1.0.7.zip" do
+  source "http://downloads.wordpress.org/plugin/json-api.1.0.7.zip"
+  mode "0644"
+  checksum "be94942e19450ec8c31e022aa514972baad9a538a475c73dccc4a77eb050e00e"
+end  
+
+execute "unzip-json-api" do
+  cwd File.join(node[:wordpress][:dir],"wp-content/plugins")
+  command "unzip #{Chef::Config[:file_cache_path]}/json-api.1.0.7.zip"
+  creates "#{node[:wordpress][:dir]}/wp-content/plugins/json-api/readme.txt"
 end
+
+cookbook_file File.join(node[:wordpress][:dir],"wp-content/plugins/json-api/controllers/posts.php") do
+  source "json-api_controllers_posts.php" 
+  mode "0644"
+end
+
+cookbook_file File.join(node[:wordpress][:dir],"wp-content/plugins/json-api/models/post.php") do
+  source "json-api_models_post.php" 
+  mode "0644"
+end
+
+remote_file "#{Chef::Config[:file_cache_path]}/paragrams.zip" do
+  source "http://wpshower.com/paragrams.zip"
+  mode "0644"
+end
+
+execute "unzip-paragrams" do
+  cwd node[:wordpress][:dir]
+  command "unzip #{Chef::Config[:file_cache_path]}/paragrams.zip"
+  creates "#{node[:wordpress][:dir]}/wp-content/themes/paragrams/functions.php"
+end 
+
+cookbook_file File.join(node[:wordpress][:dir],"wp-content/themes/paragrams/functions.php") do
+  source "paragrams_functions.php" 
+  mode "0644"                         
+  checksum "d3b9a8f5561000608c83f45b8df56feba28638974588afe681e796ad10fa33b5"
+end   
+
+# drive wordpress install from chef
+# %W{libxslt1-dev libxml2-dev}.each do |pkg|
+#   p = package pkg do
+#     action :nothing                                     
+#   end            
+#   p.run_action(:install)    
+# end  
+# 
+# r = gem_package "mechanize" do
+#   action :nothing
+# end
+# 
+# r.run_action(:install)    
+# 
+# begin
+#   require 'mechanize'
+# rescue LoadError
+#   Chef::Log.warn("Missing gem 'mechanize'")
+# end     
+# 
+# ruby_block "setup wordpress for demo" do
+#   block do
+# 
+#     end
+#   end
+#   action :create
+# end
+
+
+
+
+

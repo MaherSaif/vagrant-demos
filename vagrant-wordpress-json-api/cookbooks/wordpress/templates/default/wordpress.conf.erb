@@ -5,14 +5,14 @@
 
   <Directory <%= @params[:docroot] %>>
     Options FollowSymLinks
-    AllowOverride None
+    AllowOverride All
     Order allow,deny
     Allow from all
   </Directory>
 
   <Directory />
     Options FollowSymLinks
-    AllowOverride None
+    AllowOverride All
   </Directory>
 
   LogLevel info
