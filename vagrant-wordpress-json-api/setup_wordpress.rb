@@ -1,6 +1,17 @@
 require "rubygems"
 require "mechanize"
 
+a = Mechanize.new
+a.get('http://wordpress.42foo.com:4567/wp-admin/install.php') do |page|
+  step_2 = page.form_with(:action => 'install.php?step=2') do |f|
+    f.weblog_title  = "Test Blog"
+    f.user_name         = "admin"
+    f.admin_password = "adminadmin"  
+    f.admin_password2 = "adminadmin" 
+    f.admin_email = "admin@wordpress.org" 
+  end.click_button
+end
+
 module Wordpress
   #from https://gist.github.com/572383
   # A proof of concept class, displaying how to manage a WP blog through ruby
@@ -125,23 +136,23 @@ end
 puts "#{Time.now} Initializing link..."
 blog = Wordpress::Blog.new("http://wordpress.42foo.com:4567","admin","adminadmin")
  
-# [{:term => "facebook", :label => "Facebook Message", :scheme => "facebook"},{:term => "tumblr", :label => "Tumblr Message", :scheme => "tumblr"}].each do |post_cat|
-#   unless blog.category_exists? post_cat
-#     puts "#{Time.now} Creating new category ..."
-#     blog.add_category post_cat
-#   end
-# end
-# 
-# %W{advanced-excerpt json-api wp-pagenavi}.each do |plugin|
-#   puts "#{Time.now} Enabling Plugin #{plugin} ..."
-#   blog.enable_plugin(plugin)
-# end 
-# 
-# puts "#{Time.now} Enabling json-api controllers ..."
-# blog.enable_json_api
-# puts "#{Time.now} Enabling permalinks ..."
-# blog.enable_permalinks  
-# puts "#{Time.now} Enabling theme ..."
-# blog.enable_theme("paragrams")  
+[{:term => "facebook", :label => "Facebook Message", :scheme => "facebook"},{:term => "tumblr", :label => "Tumblr Message", :scheme => "tumblr"}].each do |post_cat|
+  unless blog.category_exists? post_cat
+    puts "#{Time.now} Creating new category ..."
+    blog.add_category post_cat
+  end
+end
+
+%W{advanced-excerpt json-api wp-pagenavi}.each do |plugin|
+  puts "#{Time.now} Enabling Plugin #{plugin} ..."
+  blog.enable_plugin(plugin)
+end 
+
+puts "#{Time.now} Enabling json-api controllers ..."
+blog.enable_json_api
+puts "#{Time.now} Enabling permalinks ..."
+blog.enable_permalinks  
+puts "#{Time.now} Enabling theme ..."
+blog.enable_theme("paragrams")  
 puts "#{Time.now} Customize Advanced Exc ..."
 blog.custom_excerpt

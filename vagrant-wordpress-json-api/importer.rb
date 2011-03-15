@@ -50,7 +50,7 @@ class Tempfile
   attr_accessor :original_filename#, :content_type; 
 end
 
-posts = rg.get("sheworks/posts")
+posts = rg.get("iTeh.Solutions/posts")
 require 'net/http'
 
 posts["data"].each do |post|
