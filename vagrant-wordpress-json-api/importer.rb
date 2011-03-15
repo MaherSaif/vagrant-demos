@@ -40,7 +40,6 @@ ap result
        :categories => "tumblr",  
        :content => post["regular_body"]
      }, :content_type => :json, :accept => :json      
-    ap JSON.parse(post_result)
   end
 end 
 
@@ -66,7 +65,6 @@ posts["data"].each do |post|
     tempfile = Tempfile.new("image")
     tempfile.binmode
     tempfile.original_filename = File.basename URI::parse(post["picture"]).path
-    # tempfile.content_type = "image/jpeg"          
     tempfile.write open( post["picture"],"rb" ).read
     tempfile.rewind
   when "status"
