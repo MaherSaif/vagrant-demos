@@ -163,6 +163,19 @@ cookbook_file File.join(node[:wordpress][:dir],"wp-content/themes/paragrams/func
   checksum "d3b9a8f5561000608c83f45b8df56feba28638974588afe681e796ad10fa33b5"
 end   
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 # drive wordpress install from chef
 # %W{libxslt1-dev libxml2-dev}.each do |pkg|
 #   p = package pkg do
