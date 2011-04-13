@@ -1,0 +1,63 @@
+{
+  "id": "wikitude_java_app",
+  "server_roles": [
+    "wikitude_java_app"
+  ],
+  "type": {
+    "wikitude_java_app": [
+      "java_webapp",
+      "tomcat"
+    ]
+  },
+  "database_slave_role": [
+    "wikitude_java_app_database_slave"
+  ],
+  "database_master_role": [
+    "wikitude_java_app_database_master"
+  ],
+  "repository": "git@github.com:company/my_app.git",
+  "revision": {
+    "production": "commit hash, branch or tag to deploy"
+  },
+  "force": {
+    "production": "true or false w/o quotes to force deployment, see the rails.rb recipe"
+  },
+  "databases": {
+    "production": {
+      "max_active": "100",
+      "max_idle": "30",
+      "max_wait": "10000",
+      "username": "db_user",
+      "adapter": "mysql",
+      "driver": "com.mysql.jdbc.Driver",
+      "port": "3306",
+      "password": "awesome_password",
+      "database": "wikitude_java_app_production"
+    }
+  },
+  "mysql_root_password": {
+    "production": "test"
+  },
+  "mysql_debian_password": {
+    "production": "test"
+  },
+  "mysql_repl_password": {
+    "production": "test"
+  },
+  "snapshots_to_keep": {
+    "production": "3"
+  },
+  "deploy_to": "/srv/wikitude_java_app",
+  "owner": "root",
+  "group": "root",
+  "_packages": {
+    "package_name": "specific packages required for installation at the OS level to run the app like libraries and specific version, e.g.",
+    "curl": "7.19.5-1ubuntu2"
+  },
+  "war": {
+      "production" : {
+          "checksum": "331ddff0211739db4928c9254aa30c6b386d44d2c445b10a6ee3407e51062b73",
+          "source":"http://iteh.at/probe.war"
+      }
+  }
+}

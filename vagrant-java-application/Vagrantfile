@@ -1,0 +1,36 @@
+require '../lib/vagrant_solo_databag_patch'
+
+Vagrant::Config.run do |config|
+  # All Vagrant configuration is done here. For a detailed explanation
+  # and listing of configuration options, please view the documentation
+  # online.
+
+  # Every Vagrant virtual environment requires a box to build off of.
+  config.vm.box = "lucid32"
+
+  # Forward guest port 80 to host port 4567 and name the mapping "web"
+  config.vm.forward_port("web", 80, 4567)   
+  config.vm.forward_port("tomcat", 8080, 4568)
+
+  config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = "./cookbooks"
+    chef.roles_path = "./roles"
+    chef.data_bag_path = "./databags"
+    # ensure the latest packages
+    chef.add_recipe("apt")
+    chef.add_role("production")
+    chef.add_role("wikitude_java_app")
+    chef.add_role("wikitude_java_app_database_master")
+
+
+
+    chef.json.merge!({
+        :java => {
+          :install_flavor => "sun"
+        }
+
+    })
+
+  end
+
+end
