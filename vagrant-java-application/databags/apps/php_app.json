@@ -1,10 +1,10 @@
 {
-  "id": "wikitude_php_app",
+  "id": "php_app",
   "server_roles": [
-    "wikitude_php_app"
+    "php_app"
   ],
   "type": {
-    "wikitude_php_app": [
+    "php_app": [
       "recipes in this application cookbook to run for this role",
       "php",
       "mod_php_apache2"

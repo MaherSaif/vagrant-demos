@@ -1,5 +1,5 @@
 {
-  "name": "my_app",
+  "name": "java_app",
   "chef_type": "role",
   "json_class": "Chef::Role",
   "default_attributes": {

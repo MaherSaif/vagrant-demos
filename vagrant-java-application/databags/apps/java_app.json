@@ -1,19 +1,19 @@
 {
-  "id": "wikitude_java_app",
+  "id": "java_app",
   "server_roles": [
-    "wikitude_java_app"
+    "java_app"
   ],
   "type": {
-    "wikitude_java_app": [
+    "java_app": [
       "java_webapp",
       "tomcat"
     ]
   },
   "database_slave_role": [
-    "wikitude_java_app_database_slave"
+    "java_app_database_slave"
   ],
   "database_master_role": [
-    "wikitude_java_app_database_master"
+    "java_app_database_master"
   ],
   "repository": "git@github.com:company/my_app.git",
   "revision": {
@@ -32,7 +32,7 @@
       "driver": "com.mysql.jdbc.Driver",
       "port": "3306",
       "password": "awesome_password",
-      "database": "wikitude_java_app_production"
+      "database": "java_app_production"
     }
   },
   "mysql_root_password": {
@@ -47,7 +47,7 @@
   "snapshots_to_keep": {
     "production": "3"
   },
-  "deploy_to": "/srv/wikitude_java_app",
+  "deploy_to": "/srv/java_app",
   "owner": "root",
   "group": "root",
   "_packages": {

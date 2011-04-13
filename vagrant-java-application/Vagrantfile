@@ -19,8 +19,8 @@ Vagrant::Config.run do |config|
     # ensure the latest packages
     chef.add_recipe("apt")
     chef.add_role("production")
-    chef.add_role("wikitude_java_app")
-    chef.add_role("wikitude_java_app_database_master")
+    chef.add_role("java_app")
+    chef.add_role("java_app_database_master")
 
 
 

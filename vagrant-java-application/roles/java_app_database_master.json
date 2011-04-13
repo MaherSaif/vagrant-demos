@@ -1,5 +1,5 @@
 {
-  "name": "wikitude_java_app_database_master",
+  "name": "java_app_database_master",
   "chef_type": "role",
   "json_class": "Chef::Role",
   "default_attributes": {
