@@ -23,17 +23,20 @@ include_recipe "tomcat"
 
 # remove ROOT application
 # TODO create a LWRP to enable/disable tomcat apps
-directory "#{node['tomcat']['webapp_dir']}/ROOT" do
+
+path = app['path'] ? app['path'] : "ROOT"
+
+directory "#{node['tomcat']['webapp_dir']}/#{path}" do
   recursive true
   action :delete
-  not_if "test -L #{node['tomcat']['context_dir']}/ROOT.xml"
+  not_if "test -L #{node['tomcat']['context_dir']}/#{path}.xml"
 end
-link "#{node['tomcat']['context_dir']}/ROOT.xml" do
+link "#{node['tomcat']['context_dir']}/#{path}.xml" do
   to "#{app['deploy_to']}/shared/#{app['id']}.xml"
   notifies :restart, resources(:service => "tomcat")
 end
 
-if ::File.symlink?(::File.join(node['tomcat']['context_dir'], "ROOT.xml"))
+if ::File.symlink?(::File.join(node['tomcat']['context_dir'], "#{path}.xml"))
   d = resources(:remote_file => app['id'])
   d.notifies :restart, resources(:service => "tomcat")
 end

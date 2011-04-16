@@ -26,7 +26,7 @@ end
 
 tomcat_pkgs = value_for_platform(
   ["debian","ubuntu"] => {
-    "default" => ["tomcat6","tomcat6-admin"]
+    "default" => ["tomcat6","tomcat6-admin","libmysql-java"," libtcnative-1"]
   },
   ["centos","redhat","fedora"] => {
     "default" => ["tomcat6","tomcat6-admin-webapps"]
@@ -69,8 +69,25 @@ else
   end
 end
 
+case node["platform"]
+  when "ubuntu"
+    link "#{node['tomcat']['home']}/lib/mysql-connector-java.jar" do
+      to "/usr/share/java/mysql-connector-java.jar"
+      notifies :restart, resources(:service => "tomcat")
+    end
+end
+
+
 template "/etc/tomcat6/server.xml" do
   source "server.xml.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+  notifies :restart, resources(:service => "tomcat")
+end
+
+template "/etc/tomcat6/tomcat-users.xml" do
+  source "tomcat-users.xml.erb"
   owner "root"
   group "root"
   mode "0644"

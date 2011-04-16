@@ -89,12 +89,15 @@ if app["database_master_role"]
       owner app["owner"]
       group app["group"]
       mode "644"
-      variables(
-        :host => dbm['fqdn'],
-        :app => app['id'],
-        :database => app['databases'][node.app_environment],
-        :war => "#{app['deploy_to']}/releases/#{app['war'][node.app_environment]['checksum']}.war"
-      )
+      template_vars = {
+          :host => dbm['fqdn'],
+          :app => app['id'],
+          :database => app['databases'][node.app_environment],
+          :war => "#{app['deploy_to']}/releases/#{app['war'][node.app_environment]['checksum']}.war",
+      }
+      template_vars[:path] = app['path'] if app['path']
+      template_vars[:privileged] = true if app['privileged']
+      variables(template_vars)
     end
   end
 end

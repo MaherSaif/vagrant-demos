@@ -201,6 +201,8 @@ include_recipe "apache2::mod_mime"
 include_recipe "apache2::mod_negotiation"
 include_recipe "apache2::mod_setenvif"
 include_recipe "apache2::mod_log_config" if platform?("centos", "redhat", "fedora", "suse", "arch")
+include_recipe "apache2::mod_proxy"
+include_recipe "apache2::mod_proxy_http"
 
 apache_site "default" if platform?("centos", "redhat", "fedora")
 

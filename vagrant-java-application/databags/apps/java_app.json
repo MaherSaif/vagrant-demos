@@ -6,7 +6,8 @@
   "type": {
     "java_app": [
       "java_webapp",
-      "tomcat"
+      "tomcat",
+      "reverse_proxy_apache2"
     ]
   },
   "database_slave_role": [
@@ -15,13 +16,6 @@
   "database_master_role": [
     "java_app_database_master"
   ],
-  "repository": "git@github.com:company/my_app.git",
-  "revision": {
-    "production": "commit hash, branch or tag to deploy"
-  },
-  "force": {
-    "production": "true or false w/o quotes to force deployment, see the rails.rb recipe"
-  },
   "databases": {
     "production": {
       "max_active": "100",
@@ -51,13 +45,17 @@
   "owner": "root",
   "group": "root",
   "_packages": {
-    "package_name": "specific packages required for installation at the OS level to run the app like libraries and specific version, e.g.",
-    "curl": "7.19.5-1ubuntu2"
+    "libmysql-java": ""
   },
   "war": {
       "production" : {
           "checksum": "331ddff0211739db4928c9254aa30c6b386d44d2c445b10a6ee3407e51062b73",
           "source":"http://iteh.at/probe.war"
       }
-  }
+  },
+  "path": "probe",
+  "privileged": "true",
+  "domain_name": "java_app.42foo.com",
+  "domain_name_aliases": "alias_java_app.42foo.com"
+
 }
