@@ -36,7 +36,7 @@ $ vagrant up
 
 This will download the lucid32 box (500 MB so this can take a while on the first download) and do the provisioning
 
-after the chef-solo run you can access "http://java_app.42foo.com:4567/probe/":http://java_app.42foo.com:4567/probe/ with the username "probe" and the password "probe"
-this hits the application through apache. "http://java_app.42foo.com:4568/probe/":http://java_app.42foo.com:4568/probe/ will hit tomcat directly.
+after the chef-solo run you can access "http://java_app.smackaho.st:4567/probe/":http://java_app.smackaho.st:4567/probe/ with the username "probe" and the password "probe"
+this hits the application through apache. "http://java_app.smackaho.st:4568/probe/":http://java_app.smackaho.st:4568/probe/ will hit tomcat directly.
 
-To prove the jdbc connection go to "http://java_app.42foo.com:4567/probe/sql/datasourcetest.htm?webapp=/probe&resource=jdbc/java_app":http://java_app.42foo.com:4567/probe/sql/datasourcetest.htm?webapp=/probe&resource=jdbc/java_app
+To prove the jdbc connection go to "http://java_app.smackaho.st:4567/probe/sql/datasourcetest.htm?webapp=/probe&resource=jdbc/java_app":http://java_app.smackaho.st:4567/probe/sql/datasourcetest.htm?webapp=/probe&resource=jdbc/java_app
