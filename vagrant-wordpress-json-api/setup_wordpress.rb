@@ -2,7 +2,7 @@ require "rubygems"
 require "mechanize"
 
 a = Mechanize.new
-a.get('http://wordpress.42foo.com:4567/wp-admin/install.php') do |page|
+a.get('http://wordpress.smackaho.st:4567/wp-admin/install.php') do |page|
   step_2 = page.form_with(:action => 'install.php?step=2') do |f|
     f.weblog_title  = "Test Blog"
     f.user_name         = "admin"
@@ -134,7 +134,7 @@ end
 
 # Go for it
 puts "#{Time.now} Initializing link..."
-blog = Wordpress::Blog.new("http://wordpress.42foo.com:4567","admin","adminadmin")
+blog = Wordpress::Blog.new("http://wordpress.smackaho.st:4567","admin","adminadmin")
  
 [{:term => "facebook", :label => "Facebook Message", :scheme => "facebook"},{:term => "tumblr", :label => "Tumblr Message", :scheme => "tumblr"}].each do |post_cat|
   unless blog.category_exists? post_cat

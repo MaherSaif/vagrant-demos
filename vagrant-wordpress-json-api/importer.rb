@@ -7,7 +7,7 @@ require 'rest-graph'
 require 'open-uri'    
 require 'uri'
    
-resturl = "http://wordpress.42foo.com:4567/api/"
+resturl = "http://wordpress.smackaho.st:4567/api/"
 author="admin"
 
 content = ""
