@@ -1,0 +1,22 @@
+<VirtualHost *:80 <%= "*:#{node[:vagrant][:config][:vm][:forwarded_ports][:web][:hostport]}" if node[:vagrant] %>>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml application/javascript text/css
+
+  #allow reverse proxy
+  ProxyRequests Off
+  <Proxy *>
+    Order Deny,Allow
+    Allow from all
+  </Proxy>
+
+  ProxyPreserveHost On
+  ProxyPass <%= @params[:frontend_path] %> http://<%= @params[:backend_host] %>:<%= @params[:backend_port]%><%= @params[:backend_path] %>
+  ProxyPassReverse <%= @params[:frontend_path] %> http://<%= @params[:backend_host] %>:<%= @params[:backend_port]%><%= @params[:backend_path] %>
+
+  ServerName <%= @params[:server_name] %>
+  <% if (@params[:server_aliases] && (@params[:server_aliases].is_a? Array))  %>
+  ServerAlias <% @params[:server_aliases].each do |server_alias| %><%= "#{server_alias} "%><% end %>
+  <% end %>
+  ErrorLog <%= @node[:apache][:log_dir] %>/<%= @params[:server_name] %>-error.log
+  CustomLog <%= @node[:apache][:log_dir] %>/<%= @params[:server_name] %>-access.log combined
+
+</VirtualHost>

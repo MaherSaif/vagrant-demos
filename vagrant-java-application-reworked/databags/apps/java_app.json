@@ -1,0 +1,68 @@
+{
+  "id": "java_app",
+  "server_roles": [
+    "java_app"
+  ],
+  "type": {
+    "java_app": [
+    ],
+      "java_app_definitions": [
+         "application_java_webapp",
+         "application_tomcat",
+         "application_reverse_proxy_apache2"
+
+       ]
+  },
+  "database_slave_role": [
+    "java_app_database_slave"
+  ],
+  "database_master_role": [
+    "java_app_database_master"
+  ],
+  "databases": {
+    "production": {
+      "max_active": "100",
+      "max_idle": "30",
+      "max_wait": "10000",
+      "username": "db_user",
+      "adapter": "mysql",
+      "driver": "com.mysql.jdbc.Driver",
+      "port": "3306",
+      "password": "awesome_password",
+      "database": "java_app_production"
+    }
+  },
+  "mysql_root_password": {
+    "production": "test"
+  },
+  "mysql_debian_password": {
+    "production": "test"
+  },
+  "mysql_repl_password": {
+    "production": "test"
+  },
+  "snapshots_to_keep": {
+    "production": "3"
+  },
+  "deploy_to": "/srv/java_app",
+  "owner": "root",
+  "group": "root",
+  "_packages": {
+    "libmysql-java": ""
+  },
+  "war": {
+      "development" : {
+          "checksum": "dac535447b4b3a6db303a2df289565ede2ef0c432a5ccaef4c5185058bbe96be",
+          "source":"http://iteh.at/assets/probe.war"
+      },
+      "production" : {
+          "checksum": "dac535447b4b3a6db303a2df289565ede2ef0c432a5ccaef4c5185058bbe96be",
+          "source":"http://iteh.at/assets/probe.war"
+      }
+  },
+  "path": "/probe",
+  "privileged": "true",
+  "domain_name": "java_app.smackaho.st",
+  "domain_name_aliases": "alias_java_app.smackaho.st"
+
+}
